@@ -92,7 +92,7 @@ class GenderController extends Controller
         if ($delete) {
             session()->flash('success', 'Gender deleted successfully');
         } else {
-            session()->flash('error', 'Gender not deleted successfully');
+            session()->flash('error', 'Gender does not delete successfully');
         }
 
         return redirect()->route('genders.index');
