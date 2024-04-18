@@ -14,9 +14,9 @@
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link displayinline dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                aria-expanded="false">Dropdown</a>
+                aria-expanded="false">Create</a>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="{{ route('genders.index') }}">Gender</a></li>
                 <li><a class="dropdown-item" href="#">Another action</a></li>
                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                 <li>

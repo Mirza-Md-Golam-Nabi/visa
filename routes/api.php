@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Api\Auth\RegisteredUserController;
+use App\Http\Controllers\Api\GenderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -10,6 +11,8 @@ Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
 Route::middleware('auth:api')->group(function () {
     Route::get('logout', [AuthenticatedSessionController::class, 'destroy']);
+
+    Route::apiResource('genders', GenderController::class);
 
 });
 
