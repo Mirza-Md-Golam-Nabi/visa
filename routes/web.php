@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GenderController;
+use App\Http\Controllers\MaritalStatusController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,8 +19,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resources([
-        'genders' => GenderController::class
+        'genders' => GenderController::class,
+        'marital-statuses' => MaritalStatusController::class,
     ]);
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

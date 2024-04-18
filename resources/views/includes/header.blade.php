@@ -17,7 +17,7 @@
                 aria-expanded="false">Create</a>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{{ route('genders.index') }}">Gender</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="{{ route('marital-statuses.index') }}">Marital Status</a></li>
                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                 <li>
                     <hr class="dropdown-divider">
