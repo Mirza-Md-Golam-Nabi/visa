@@ -76,7 +76,7 @@ class GenderController extends Controller
         if ($update) {
             session()->flash('success', 'Gender updated successfully');
         } else {
-            session()->flash('error', 'Gender does not updated successfully');
+            session()->flash('error', 'Gender does not update successfully');
         }
 
         return redirect()->route('genders.index');
