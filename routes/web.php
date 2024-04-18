@@ -3,6 +3,7 @@
 use App\Http\Controllers\GenderController;
 use App\Http\Controllers\MaritalStatusController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReligionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,6 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::resources([
         'genders' => GenderController::class,
         'marital-statuses' => MaritalStatusController::class,
+        'religions' => ReligionController::class,
     ]);
 });
 

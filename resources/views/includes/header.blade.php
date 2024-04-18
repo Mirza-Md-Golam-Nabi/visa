@@ -18,7 +18,7 @@
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{{ route('genders.index') }}">Gender</a></li>
                 <li><a class="dropdown-item" href="{{ route('marital-statuses.index') }}">Marital Status</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li><a class="dropdown-item" href="{{ route('religions.index') }}">Religion</a></li>
                 <li>
                     <hr class="dropdown-divider">
                 </li>
