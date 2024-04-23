@@ -3,9 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 use Database\Seeders\GenderSeeder;
 use Database\Seeders\MaritalStatusSeeder;
 use Database\Seeders\ReligionSeeder;
+use Database\Seeders\TravelPurposeSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,6 +21,7 @@ class DatabaseSeeder extends Seeder
             GenderSeeder::class,
             MaritalStatusSeeder::class,
             ReligionSeeder::class,
+            TravelPurposeSeeder::class,
         ]);
 
     }
