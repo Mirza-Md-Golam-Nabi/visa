@@ -22,7 +22,7 @@ class MaritalStatusSeeder extends Seeder
         ];
 
         foreach ($marital_statuses as $marital_status) {
-            MaritalStatus::create($marital_status);
+            MaritalStatus::firstOrCreate($marital_status);
         }
     }
 }

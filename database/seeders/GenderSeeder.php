@@ -22,7 +22,7 @@ class GenderSeeder extends Seeder
         ];
 
         foreach ($genders as $gender) {
-            Gender::create($gender);
+            Gender::firstOrCreate($gender);
         }
     }
 }

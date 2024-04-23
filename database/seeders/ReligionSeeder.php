@@ -22,7 +22,7 @@ class ReligionSeeder extends Seeder
         ];
 
         foreach ($religions as $religion) {
-            Religion::create($religion);
+            Religion::firstOrCreate($religion);
         }
     }
 }
