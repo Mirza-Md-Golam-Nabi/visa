@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use Database\Seeders\GenderSeeder;
+use Database\Seeders\LicenseTypeSeeder;
 use Database\Seeders\MaritalStatusSeeder;
 use Database\Seeders\ReligionSeeder;
 use Database\Seeders\TravelPurposeSeeder;
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
             MaritalStatusSeeder::class,
             ReligionSeeder::class,
             TravelPurposeSeeder::class,
+            LicenseTypeSeeder::class,
         ]);
 
     }
