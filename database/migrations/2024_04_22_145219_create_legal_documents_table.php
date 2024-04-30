@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('pc_ref_no')->nullable();
             $table->string('license_type')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

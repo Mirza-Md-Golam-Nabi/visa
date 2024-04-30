@@ -21,10 +21,11 @@ return new class extends Migration
             $table->string('visa_issue_place')->nullable();
             $table->string('qualification')->nullable();
             $table->string('profession')->nullable();
-            $table->string('travel_purpose')->nullable();
+            $table->string('travel_purpose', 30)->nullable();
             $table->string('musaned_no')->nullable();
             $table->string('wakala_no')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

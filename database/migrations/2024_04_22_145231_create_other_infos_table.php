@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('other_infos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('personal_info_id');
-            $table->string('stay_duration')->nullable();
+            $table->string('stay_duration', 10)->nullable();
             $table->string('arrival_date')->nullable();
             $table->string('departure_date')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('permanent_address')->nullable();
             $table->string('phone', 20)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

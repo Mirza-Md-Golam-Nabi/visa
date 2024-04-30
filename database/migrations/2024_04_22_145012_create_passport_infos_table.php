@@ -4,8 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-use function Laravel\Prompts\table;
-
 return new class extends Migration
 {
     /**
@@ -19,8 +17,9 @@ return new class extends Migration
             $table->string('passport_no')->nullable();
             $table->date('passport_issue_date')->nullable();
             $table->string('passport_issue_place')->nullable();
-            $table->string('validity')->nullable();
+            $table->string('validity', 10)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
