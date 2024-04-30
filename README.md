@@ -70,6 +70,5 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 1. Pull the project from github.com. Project link: (https://github.com/Mirza-Md-Golam-Nabi/visa.git)
 2. Run this command:
    a. composer install
-   b. php artisan migrate
+   b. php artisan migrate --seed
    c. php artisan passport:client --personal // personal_access_token=visa
-   d. php artisan db:seed
