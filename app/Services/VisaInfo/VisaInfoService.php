@@ -2,6 +2,8 @@
 
 namespace App\Services\VisaInfo;
 
+use App\Models\VisaInfo;
+
 class VisaInfoService
 {
     /**
@@ -12,24 +14,24 @@ class VisaInfoService
         //
     }
 
-    public function index(): object
-    {
-        return Gender::orderBy('title', 'asc')
-            ->get();
-    }
-
     public function store(array $data): object
     {
-        return Gender::create($data);
+        return VisaInfo::create($data);
     }
 
-    public function update(array $data, Gender $gender): bool
+    public function update(array $data, int $personal_id): object
     {
-        return $gender->update($data);
+        return VisaInfo::updateOrCreate(['personal_info_id' => $personal_id], $data);
     }
 
-    public function softDelete(Gender $gender): bool
+    public function softDelete(int $personal_id): bool
     {
-        return $gender->delete();
+        $visa_info = VisaInfo::where('personal_info_id', $personal_id)->first();
+
+        if ($visa_info) {
+            return $visa_info->delete();
+        }
+
+        return false;
     }
 }

@@ -22,7 +22,7 @@
                 <li>
                     <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="#">Separated link</a></li>
+                <li><a class="dropdown-item" href="{{ route('applications.index') }}">Applications</a></li>
             </ul>
         </li>
         <li class="nav-item">

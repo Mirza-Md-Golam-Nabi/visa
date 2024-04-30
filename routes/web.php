@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\GenderController;
 use App\Http\Controllers\MaritalStatusController;
 use App\Http\Controllers\ProfileController;
@@ -23,6 +24,7 @@ Route::middleware('auth')->group(function () {
         'genders' => GenderController::class,
         'marital-statuses' => MaritalStatusController::class,
         'religions' => ReligionController::class,
+        'applications' => ApplicationController::class,
     ]);
 });
 

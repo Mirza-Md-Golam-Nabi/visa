@@ -2,6 +2,8 @@
 
 namespace App\Services\PassportInfo;
 
+use App\Models\PassportInfo;
+
 class PassportInfoService
 {
     /**
@@ -12,24 +14,24 @@ class PassportInfoService
         //
     }
 
-    public function index(): object
-    {
-        return Gender::orderBy('title', 'asc')
-            ->get();
-    }
-
     public function store(array $data): object
     {
-        return Gender::create($data);
+        return PassportInfo::create($data);
     }
 
-    public function update(array $data, Gender $gender): bool
+    public function update(array $data, int $personal_id): object
     {
-        return $gender->update($data);
+        return PassportInfo::updateOrCreate(['personal_info_id' => $personal_id], $data);
     }
 
-    public function softDelete(Gender $gender): bool
+    public function softDelete(int $personal_id): bool
     {
-        return $gender->delete();
+        $passport_info = PassportInfo::where('personal_info_id', $personal_id)->first();
+
+        if ($passport_info) {
+            return $passport_info->delete();
+        }
+
+        return false;
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Services\LegalDocument;
 
+use App\Models\LegalDocument;
+
 class LegalDocumentService
 {
     /**
@@ -12,24 +14,24 @@ class LegalDocumentService
         //
     }
 
-    public function index(): object
-    {
-        return Gender::orderBy('title', 'asc')
-            ->get();
-    }
-
     public function store(array $data): object
     {
-        return Gender::create($data);
+        return LegalDocument::create($data);
     }
 
-    public function update(array $data, Gender $gender): bool
+    public function update(array $data, int $personal_id): object
     {
-        return $gender->update($data);
+        return LegalDocument::updateOrCreate(['personal_info_id' => $personal_id], $data);
     }
 
-    public function softDelete(Gender $gender): bool
+    public function softDelete(int $personal_id): bool
     {
-        return $gender->delete();
+        $legal_document = LegalDocument::where('personal_info_id', $personal_id)->first();
+
+        if ($legal_document) {
+            return $legal_document->delete();
+        }
+
+        return false;
     }
 }

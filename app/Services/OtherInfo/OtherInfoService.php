@@ -2,6 +2,8 @@
 
 namespace App\Services\OtherInfo;
 
+use App\Models\OtherInfo;
+
 class OtherInfoService
 {
     /**
@@ -12,24 +14,24 @@ class OtherInfoService
         //
     }
 
-    public function index(): object
-    {
-        return Gender::orderBy('title', 'asc')
-            ->get();
-    }
-
     public function store(array $data): object
     {
-        return Gender::create($data);
+        return OtherInfo::create($data);
     }
 
-    public function update(array $data, Gender $gender): bool
+    public function update(array $data, int $personal_id): object
     {
-        return $gender->update($data);
+        return OtherInfo::updateOrCreate(['personal_info_id' => $personal_id], $data);
     }
 
-    public function softDelete(Gender $gender): bool
+    public function softDelete(int $personal_id): bool
     {
-        return $gender->delete();
+        $other_info = OtherInfo::where('personal_info_id', $personal_id)->first();
+
+        if ($other_info) {
+            return $other_info->delete();
+        }
+
+        return false;
     }
 }
