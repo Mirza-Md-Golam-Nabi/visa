@@ -5,7 +5,6 @@ namespace App\Http\Requests\Application;
 use App\Rules\PhoneNumber;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StoreApplicationRequest extends FormRequest
 {
@@ -73,5 +72,28 @@ class StoreApplicationRequest extends FormRequest
         return [
             'pc_ref_no' => 'police reference no',
         ];
+    }
+
+    /**
+     * Handle a failed validation attempt.
+     *
+     * @param  \Illuminate\Contracts\Validation\Validator  $validator
+     * @return void
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function failedValidation(Validator $validator)
+    {
+        $response = null;
+
+        if ($this->is('api/*')) {
+            $response = failedValidationForApi($validator);
+        }
+
+        $exception = $validator->getException();
+
+        throw (new $exception($validator, $response))
+            ->errorBag($this->errorBag)
+            ->redirectTo($this->getRedirectUrl());
     }
 }

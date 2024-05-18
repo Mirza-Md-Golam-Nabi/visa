@@ -4,7 +4,6 @@ namespace App\Http\Requests\TravelPurpose;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StoreTravelPurposeRequest extends FormRequest
 {
@@ -34,10 +33,20 @@ class StoreTravelPurposeRequest extends FormRequest
      * @param  \Illuminate\Contracts\Validation\Validator  $validator
      * @return void
      *
-     * @throws \Illuminate\Http\Exceptions\HttpResponseException
+     * @throws \Illuminate\Validation\ValidationException
      */
-    protected function failedValidation(Validator $validator)
+    public function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(response()->json($validator->errors(), 422));
+        $response = null;
+
+        if ($this->is('api/*')) {
+            $response = failedValidationForApi($validator);
+        }
+
+        $exception = $validator->getException();
+
+        throw (new $exception($validator, $response))
+            ->errorBag($this->errorBag)
+            ->redirectTo($this->getRedirectUrl());
     }
 }
