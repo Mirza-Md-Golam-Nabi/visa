@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('visa_infos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('personal_info_id');
+            $table->string('passenger_agent_name')->nullable();
+            $table->string('service_agent_name')->nullable();
             $table->string('visa_no')->nullable();
+            $table->string('category')->nullable();
+            $table->string('quantity')->nullable();
             $table->date('visa_date')->nullable();
             $table->string('sponsor_name')->nullable();
             $table->string('sponsor_id')->nullable();
@@ -24,6 +27,9 @@ return new class extends Migration
             $table->string('travel_purpose', 30)->nullable();
             $table->string('musaned_no')->nullable();
             $table->string('wakala_no')->nullable();
+            $table->string('group_no')->nullable();
+            $table->string('copile_name_arabic')->nullable();
+            $table->string('comment')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

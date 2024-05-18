@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\GenderController;
 use App\Http\Controllers\Api\MaritalStatusController;
 use App\Http\Controllers\Api\ReligionController;
 use App\Http\Controllers\Api\TravelPurposeController;
+use App\Http\Controllers\Api\VisaInfoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,7 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('marital-statuses', MaritalStatusController::class);
     Route::apiResource('religions', ReligionController::class);
     Route::apiResource('travel-purposes', TravelPurposeController::class);
+    Route::apiResource('visas', VisaInfoController::class);
     Route::apiResource('applications', ApplicationController::class);
 
 });

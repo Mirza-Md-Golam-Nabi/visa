@@ -12,8 +12,11 @@ class VisaInfo extends Model
 
     protected $table = 'visa_infos';
     protected $fillable = [
-        'personal_info_id',
+        'passenger_agent_name',
+        'service_agent_name',
         'visa_no',
+        'category',
+        'quantity',
         'visa_date',
         'sponsor_name',
         'sponsor_id',
@@ -23,5 +26,8 @@ class VisaInfo extends Model
         'travel_purpose',
         'musaned_no',
         'wakala_no',
+        'group_no',
+        'copile_name_arabic',
+        'comment',
     ];
 }

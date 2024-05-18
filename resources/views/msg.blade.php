@@ -1,11 +1,11 @@
 @if(Session::has('success'))
     <div class="alert alert-success">
-        <p>{{ Session::get('success') }}</p>
+        <span>{{ Session::get('success') }}</span>
     </div>
 @endif
 
 @if(Session::has('error'))
 	<div class="alert alert-danger">
-		<p>{{ Session::get('error') }}</p>
+		<span>{{ Session::get('error') }}</span>
 	</div>
 @endif

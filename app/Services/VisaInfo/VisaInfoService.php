@@ -14,24 +14,23 @@ class VisaInfoService
         //
     }
 
+    public function index(): object
+    {
+        return VisaInfo::orderBy('id', 'desc')->get();
+    }
+
     public function store(array $data): object
     {
         return VisaInfo::create($data);
     }
 
-    public function update(array $data, int $personal_id): object
+    public function update(array $data, VisaInfo $visa): bool
     {
-        return VisaInfo::updateOrCreate(['personal_info_id' => $personal_id], $data);
+        return $visa->update($data);
     }
 
-    public function softDelete(int $personal_id): bool
+    public function softDelete(VisaInfo $visa): bool
     {
-        $visa_info = VisaInfo::where('personal_info_id', $personal_id)->first();
-
-        if ($visa_info) {
-            return $visa_info->delete();
-        }
-
-        return false;
+        return $visa->delete();
     }
 }
