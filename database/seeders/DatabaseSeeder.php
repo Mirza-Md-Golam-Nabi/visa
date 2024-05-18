@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use Database\Seeders\DistrictSeeder;
+use Database\Seeders\DivisionSeeder;
 use Database\Seeders\GenderSeeder;
 use Database\Seeders\LicenseTypeSeeder;
 use Database\Seeders\MaritalStatusSeeder;
@@ -24,6 +26,8 @@ class DatabaseSeeder extends Seeder
             ReligionSeeder::class,
             TravelPurposeSeeder::class,
             LicenseTypeSeeder::class,
+            DivisionSeeder::class,
+            DistrictSeeder::class,
         ]);
 
     }

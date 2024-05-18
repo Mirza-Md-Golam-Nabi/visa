@@ -19,6 +19,8 @@
                 <li><a class="dropdown-item" href="{{ route('genders.index') }}">Gender</a></li>
                 <li><a class="dropdown-item" href="{{ route('marital-statuses.index') }}">Marital Status</a></li>
                 <li><a class="dropdown-item" href="{{ route('religions.index') }}">Religion</a></li>
+                <li><a class="dropdown-item" href="{{ route('service-agents.index') }}">Service</a></li>
+                <li><a class="dropdown-item" href="{{ route('passenger-agents.index') }}">Passenger</a></li>
                 <li><a class="dropdown-item" href="{{ route('visas.index') }}">Visa</a></li>
                 <li>
                     <hr class="dropdown-divider">
