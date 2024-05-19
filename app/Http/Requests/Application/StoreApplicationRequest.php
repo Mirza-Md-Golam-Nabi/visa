@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests\Application;
 
+use App\Enum\GenderEnum;
 use App\Rules\PhoneNumber;
-use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
 
 class StoreApplicationRequest extends FormRequest
 {
@@ -33,7 +35,7 @@ class StoreApplicationRequest extends FormRequest
             'mofa_old_id' => ['nullable', 'string', 'max:250'],
             'previous_nationality' => ['nullable', 'string', 'max:250'],
             'present_nationality' => ['nullable', 'string', 'max:250'],
-            'gender' => ['required', 'string', 'max:30'],
+            'gender' => ['required', Rule::enum(GenderEnum::class)],
             'marital_status' => ['required', 'string', 'max:30'],
             'sect' => ['nullable', 'string', 'max:250'],
             'religion' => ['required', 'string', 'max:30'],

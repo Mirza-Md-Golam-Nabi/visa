@@ -71,8 +71,8 @@
             <select class="form-control @error('gender') is-invalid @enderror" id="gender" name="gender" required>
                 <option value="">Please Select One</option>
                 @foreach ($genders as $gender)
-                    <option value="{{ $gender->title }}" @selected(old('gender') == $gender->title)>
-                        {{ $gender->title }}
+                    <option value="{{ $gender->value }}" @selected(old('gender') == $gender->value)>
+                        {{ $gender->value }}
                     </option>
                 @endforeach
             </select>

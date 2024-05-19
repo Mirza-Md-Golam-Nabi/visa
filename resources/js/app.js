@@ -1,6 +1,9 @@
-import './bootstrap';
+import "./bootstrap";
 
-import Alpine from 'alpinejs';
+import jQuery from "jquery";
+window.$ = jQuery;
+
+import Alpine from "alpinejs";
 
 window.Alpine = Alpine;
 

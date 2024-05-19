@@ -1,13 +1,11 @@
 <?php
 
+use App\Http\Controllers\Api\AgentController;
 use App\Http\Controllers\Api\ApplicationController;
 use App\Http\Controllers\Api\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Api\Auth\RegisteredUserController;
-use App\Http\Controllers\Api\GenderController;
 use App\Http\Controllers\Api\MaritalStatusController;
-use App\Http\Controllers\Api\PassengerAgentController;
 use App\Http\Controllers\Api\ReligionController;
-use App\Http\Controllers\Api\ServiceAgentController;
 use App\Http\Controllers\Api\TravelPurposeController;
 use App\Http\Controllers\Api\VisaInfoController;
 use Illuminate\Http\Request;
@@ -19,12 +17,10 @@ Route::post('login', [AuthenticatedSessionController::class, 'store']);
 Route::middleware('auth:api')->group(function () {
     Route::get('logout', [AuthenticatedSessionController::class, 'destroy']);
 
-    Route::apiResource('genders', GenderController::class);
     Route::apiResource('marital-statuses', MaritalStatusController::class);
     Route::apiResource('religions', ReligionController::class);
     Route::apiResource('travel-purposes', TravelPurposeController::class);
-    Route::apiResource('service-agents', ServiceAgentController::class);
-    Route::apiResource('passenger-agents', PassengerAgentController::class);
+    Route::apiResource('agents', AgentController::class);
     Route::apiResource('visas', VisaInfoController::class);
     Route::apiResource('applications', ApplicationController::class);
 

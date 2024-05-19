@@ -1,11 +1,18 @@
 <?php
 
-namespace App\Http\Requests\Agent\Service;
+namespace App\Http\Requests\Agent;
 
+use App\Enum\AgentGroupEnum;
+use App\Enum\AgentTypeEnum;
+use App\Enum\GenderEnum;
+use App\Rules\NationalId;
+use App\Rules\PhoneNumber;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreServiceAgentRequest extends FormRequest
+class StoreAgentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,21 +30,27 @@ class StoreServiceAgentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'agent_group' => ['required', 'string'],
+            'agent_type' => ['required', Rule::enum(AgentTypeEnum::class)],
+            'agent_group' => ['required', Rule::enum(AgentGroupEnum::class)],
             'name' => ['required', 'string'],
-            'nid_no' => ['required', 'string'],
-            'gender' => ['required', 'string'],
+            'nid_no' => ['required', new NationalId],
+            'gender' => ['required', Rule::enum(GenderEnum::class)],
             'father_name' => ['required', 'string'],
             'mother_name' => ['required', 'string'],
             'village_house' => ['required', 'string'],
             'road_block_sector' => ['required', 'string'],
-            'country' => ['required', 'string'],
-            'division' => ['required', 'string'],
-            'district' => ['required', 'string'],
+            'country' => ['required', 'in:Bangladesh'],
+            'division_id' => ['required', 'exists:divisions,id'],
+            'district_id' => [
+                'required',
+                Rule::exists('districts', 'id')->where(function (Builder $query) {
+                    return $query->where('division_id', $this->division_id);
+                }),
+            ],
             'police_station' => ['required', 'string'],
             'email' => ['required', 'string'],
             'post_office' => ['required', 'string'],
-            'contact_no' => ['required', 'string'],
+            'contact_no' => ['required', new PhoneNumber],
             'emergency_name_phone' => ['required', 'string'],
             'agent_image' => ['nullable', 'image'],
         ];

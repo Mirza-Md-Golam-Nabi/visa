@@ -7,36 +7,38 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="flex justify-content-end mb-2">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#storeGenderFormModal">
-                            Gender Create
-                        </button>
+                        <a href="{{ route('agents.create') }}">
+                            <button class="btn btn-primary">
+                                Service Agent Create
+                            </button>
+                        </a>
                     </div>
                     <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th scope="col">S.N</th>
-                                <th scope="col">Title</th>
+                                <th scope="col">Name</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($genders as $gender)
+                            @foreach ($agents as $agent)
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
-                                    <td>{{ $gender->title }}</td>
+                                    <td>{{ $agent->name }}</td>
                                     <td>
-                                        <a href="{{ route('genders.edit', $gender) }}" title="Edit"
-                                            class="text-primary">
+                                        <a href="{{ route('agents.show', $agent) }}" title="show" class="mr-2 text-success">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                        <a href="{{ route('agents.edit', $agent) }}" title="Edit" class="mr-2 text-primary">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <a href="#" title="Delete" class="mx-2"
-                                            style="color: red"
-                                            onclick="event.preventDefault(); document.getElementById('gender-destroy{{ $gender->id }}').submit();">
+                                        <a href="#" title="Delete" style="color: red"
+                                            onclick="event.preventDefault(); document.getElementById('agent-destroy{{ $agent->id }}').submit();">
                                             <i class="bi bi-trash"></i>
                                         </a>
-                                        <form id="gender-destroy{{ $gender->id }}"
-                                            action="{{ route('genders.destroy', $gender) }}" method="POST"
-                                            class="d-none">
+                                        <form id="agent-destroy{{ $agent->id }}"
+                                            action="{{ route('agents.destroy', $agent) }}" method="POST" class="d-none">
                                             @csrf
                                             @method('DELETE')
                                         </form>
@@ -50,5 +52,4 @@
         </div>
     </div>
 
-    @include('includes.modals.forms.gender')
 </x-app-layout>

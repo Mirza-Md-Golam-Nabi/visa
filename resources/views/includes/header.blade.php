@@ -16,11 +16,9 @@
             <a class="nav-link displayinline dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                 aria-expanded="false">Create</a>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{{ route('genders.index') }}">Gender</a></li>
                 <li><a class="dropdown-item" href="{{ route('marital-statuses.index') }}">Marital Status</a></li>
                 <li><a class="dropdown-item" href="{{ route('religions.index') }}">Religion</a></li>
-                <li><a class="dropdown-item" href="{{ route('service-agents.index') }}">Service</a></li>
-                <li><a class="dropdown-item" href="{{ route('passenger-agents.index') }}">Passenger</a></li>
+                <li><a class="dropdown-item" href="{{ route('agents.index') }}">Agent</a></li>
                 <li><a class="dropdown-item" href="{{ route('visas.index') }}">Visa</a></li>
                 <li>
                     <hr class="dropdown-divider">

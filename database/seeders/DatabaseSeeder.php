@@ -6,7 +6,6 @@ namespace Database\Seeders;
 
 use Database\Seeders\DistrictSeeder;
 use Database\Seeders\DivisionSeeder;
-use Database\Seeders\GenderSeeder;
 use Database\Seeders\LicenseTypeSeeder;
 use Database\Seeders\MaritalStatusSeeder;
 use Database\Seeders\ReligionSeeder;
@@ -21,7 +20,6 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            GenderSeeder::class,
             MaritalStatusSeeder::class,
             ReligionSeeder::class,
             TravelPurposeSeeder::class,

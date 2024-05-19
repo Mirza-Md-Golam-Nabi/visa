@@ -1,17 +1,20 @@
 <?php
 
+use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ApplicationController;
-use App\Http\Controllers\GenderController;
+use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\MaritalStatusController;
-use App\Http\Controllers\PassengerAgentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReligionController;
-use App\Http\Controllers\ServiceAgentController;
 use App\Http\Controllers\VisaInfoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::group(['prefix' => 'fetch'], function () {
+    Route::get('/district', [GeneralController::class, 'districtFetch'])->name('general.fetch.district');
 });
 
 Route::get('/dashboard', function () {
@@ -24,11 +27,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resources([
-        'genders' => GenderController::class,
         'marital-statuses' => MaritalStatusController::class,
         'religions' => ReligionController::class,
-        'service-agents' => ServiceAgentController::class,
-        'passenger-agents' => PassengerAgentController::class,
+        'agents' => AgentController::class,
         'visas' => VisaInfoController::class,
         'applications' => ApplicationController::class,
     ]);

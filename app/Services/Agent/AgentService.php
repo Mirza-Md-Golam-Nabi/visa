@@ -2,7 +2,7 @@
 
 namespace App\Services\Agent;
 
-use App\Models\ServiceAgent;
+use App\Models\Agent;
 
 class AgentService
 {
@@ -16,21 +16,21 @@ class AgentService
 
     public function index(): object
     {
-        return ServiceAgent::orderBy('id', 'asc')
+        return Agent::orderBy('id', 'asc')
             ->get();
     }
 
     public function store(array $data): object
     {
-        return ServiceAgent::create($data);
+        return Agent::create($data);
     }
 
-    public function update(array $data, ServiceAgent $service_agent): bool
+    public function update(array $data, Agent $service_agent): bool
     {
         return $service_agent->update($data);
     }
 
-    public function softDelete(ServiceAgent $service_agent): bool
+    public function softDelete(Agent $service_agent): bool
     {
         return $service_agent->delete();
     }
