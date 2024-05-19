@@ -3,9 +3,7 @@
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\GeneralController;
-use App\Http\Controllers\MaritalStatusController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\VisaInfoController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,8 +25,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resources([
-        'marital-statuses' => MaritalStatusController::class,
-        'religions' => ReligionController::class,
         'agents' => AgentController::class,
         'visas' => VisaInfoController::class,
         'applications' => ApplicationController::class,

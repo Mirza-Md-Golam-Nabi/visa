@@ -2,8 +2,7 @@
 
 namespace App\Enum;
 
-enum GenderEnum:string
-{
+enum GenderEnum: string {
     case MALE = 'Male';
     case FEMALE = 'Female';
     case OTHERS = 'Others';

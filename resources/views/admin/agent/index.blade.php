@@ -9,7 +9,7 @@
                     <div class="flex justify-content-end mb-2">
                         <a href="{{ route('agents.create') }}">
                             <button class="btn btn-primary">
-                                Service Agent Create
+                                Agent Create
                             </button>
                         </a>
                     </div>
@@ -27,10 +27,12 @@
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $agent->name }}</td>
                                     <td>
-                                        <a href="{{ route('agents.show', $agent) }}" title="show" class="mr-2 text-success">
+                                        <a href="{{ route('agents.show', $agent) }}" title="show"
+                                            class="mr-2 text-success">
                                             <i class="bi bi-eye"></i>
                                         </a>
-                                        <a href="{{ route('agents.edit', $agent) }}" title="Edit" class="mr-2 text-primary">
+                                        <a href="{{ route('agents.edit', $agent) }}" title="Edit"
+                                            class="mr-2 text-primary">
                                             <i class="bi bi-pencil"></i>
                                         </a>
                                         <a href="#" title="Delete" style="color: red"
@@ -38,7 +40,8 @@
                                             <i class="bi bi-trash"></i>
                                         </a>
                                         <form id="agent-destroy{{ $agent->id }}"
-                                            action="{{ route('agents.destroy', $agent) }}" method="POST" class="d-none">
+                                            action="{{ route('agents.destroy', $agent) }}" method="POST"
+                                            class="d-none">
                                             @csrf
                                             @method('DELETE')
                                         </form>
