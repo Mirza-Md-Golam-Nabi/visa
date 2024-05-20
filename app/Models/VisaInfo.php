@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Enum\VisaCategoryEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class VisaInfo extends Model
@@ -12,8 +14,9 @@ class VisaInfo extends Model
 
     protected $table = 'visa_infos';
     protected $fillable = [
-        'passenger_agent_name',
-        'service_agent_name',
+        'country',
+        'passenger_agent_id',
+        'service_agent_id',
         'visa_no',
         'category',
         'quantity',
@@ -30,4 +33,18 @@ class VisaInfo extends Model
         'copile_name_arabic',
         'comment',
     ];
+
+    protected $casts = [
+        'category' => VisaCategoryEnum::class,
+    ];
+
+    public function service_agent(): BelongsTo
+    {
+        return $this->belongsTo(Agent::class, 'service_agent_id', 'id');
+    }
+
+    public function passenger_agent(): BelongsTo
+    {
+        return $this->belongsTo(Agent::class, 'passenger_agent_id', 'id');
+    }
 }

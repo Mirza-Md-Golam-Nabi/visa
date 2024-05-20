@@ -2,8 +2,12 @@
 
 namespace App\Http\Requests\Visa;
 
+use App\Enum\AgentTypeEnum;
+use App\Enum\VisaCategoryEnum;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreVisaInfoRequest extends FormRequest
 {
@@ -23,20 +27,25 @@ class StoreVisaInfoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'passenger_agent_name' => ['required', 'string', 'max:250'],
-            'service_agent_name' => ['required', 'string', 'max:250'],
+            'country' => ['required', 'in:Saudi Arabia'],
+            'passenger_agent_id' => [
+                'required',
+                Rule::exists('agents', 'id')
+                    ->where(function (Builder $query) {
+                        return $query->where('agent_type', AgentTypeEnum::PASSENGER_AGENT);
+                    }),
+            ],
+            'service_agent_id' => [
+                'required',
+                Rule::exists('agents', 'id')
+                    ->where(function (Builder $query) {
+                        return $query->where('agent_type', AgentTypeEnum::SERVICE_AGENT);
+                    }),
+            ],
             'visa_no' => ['required', 'string', 'max:250'],
-            'category' => ['required', 'string', 'max:250'],
-            'quantity' => ['required', 'string', 'max:250'],
-            'visa_date' => ['required', 'date_format:Y-m-d'],
-            'sponsor_name' => ['required', 'string', 'max:250'],
+            'category' => ['required', Rule::enum(VisaCategoryEnum::class)],
+            'quantity' => ['required', 'integer'],
             'sponsor_id' => ['required', 'string', 'max:250'],
-            'visa_issue_place' => ['nullable', 'string', 'max:250'],
-            'qualification' => ['nullable', 'string', 'max:250'],
-            'profession' => ['required', 'string', 'max:250'],
-            'travel_purpose' => ['nullable', 'string', 'max:30'],
-            'musaned_no' => ['nullable', 'string', 'max:250'],
-            'wakala_no' => ['required', 'string', 'max:250'],
             'group_no' => ['required', 'string', 'max:250'],
             'copile_name_arabic' => ['required', 'string', 'max:250'],
             'comment' => ['required', 'string', 'max:250'],

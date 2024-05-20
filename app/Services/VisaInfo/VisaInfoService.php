@@ -16,7 +16,9 @@ class VisaInfoService
 
     public function index(): object
     {
-        return VisaInfo::orderBy('id', 'desc')->get();
+        return VisaInfo::with('service_agent', 'passenger_agent')
+            ->orderBy('id', 'desc')
+            ->get();
     }
 
     public function store(array $data): object

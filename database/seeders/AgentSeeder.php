@@ -27,10 +27,10 @@ class AgentSeeder extends Seeder
                 "division_id": "4",
                 "district_id": "57",
                 "police_station": "Jessore Sadar",
-                "email": "golamnabi411330@gmail.com",
+                "email": "golamnabi@gmail.com",
                 "post_office": "Rupdia",
-                "contact_no": "01825712671",
-                "emergency_name_phone": "Name = Forhad Hossain(father) & Mobile = 01912842292"
+                "contact_no": "01811111111",
+                "emergency_name_phone": "Name = Forhad Hossain(father) & Mobile = 01911111111"
             },
             {
                 "agent_type": "passenger_agent",
@@ -48,8 +48,8 @@ class AgentSeeder extends Seeder
                 "police_station": "Jessore Sadar",
                 "email": "feroza@gmail.com",
                 "post_office": "Rupdia",
-                "contact_no": "01935272950",
-                "emergency_name_phone": "Name = Forhad Hossain(father) & Mobile = 01912842292"
+                "contact_no": "01922222222",
+                "emergency_name_phone": "Name = Forhad Hossain(father) & Mobile = 01911111111"
             }
         ]';
 

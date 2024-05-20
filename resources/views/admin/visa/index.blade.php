@@ -17,7 +17,8 @@
                         <thead>
                             <tr>
                                 <th scope="col">S.N</th>
-                                <th scope="col">Title</th>
+                                <th scope="col">Service Agent</th>
+                                <th scope="col">Passenger Agent</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -25,7 +26,8 @@
                             @foreach ($visas as $visa)
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
-                                    <td>{{ $visa->passenger_agent_name }}</td>
+                                    <td>{{ $visa->service_agent->name }}</td>
+                                    <td>{{ $visa->passenger_agent->name }}</td>
                                     <td>
                                         <a href="{{ route('visas.show', $visa) }}" title="show" class="mr-2 text-success">
                                             <i class="bi bi-eye"></i>

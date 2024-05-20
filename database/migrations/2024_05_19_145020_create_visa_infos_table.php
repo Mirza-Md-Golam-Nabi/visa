@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('visa_infos', function (Blueprint $table) {
             $table->id();
-            $table->string('passenger_agent_name')->nullable();
-            $table->string('service_agent_name')->nullable();
+            $table->string('country')->nullable();
+            $table->unsignedInteger('passenger_agent_id')->nullable();
+            $table->unsignedInteger('service_agent_id')->nullable();
             $table->string('visa_no')->nullable();
             $table->string('category')->nullable();
-            $table->string('quantity')->nullable();
+            $table->unsignedTinyInteger('quantity')->nullable();
             $table->date('visa_date')->nullable();
             $table->string('sponsor_name')->nullable();
             $table->string('sponsor_id')->nullable();

@@ -27,12 +27,13 @@ class VisaInfoController extends Controller
     public function store(StoreVisaInfoRequest $request): JsonResponse
     {
         $visa = $this->visa->store($request->validated());
-        return formatResponse(0, 200, "success", $visa);
+        return formatResponse(0, 200, "Successfully store.", $visa);
     }
 
     public function show(VisaInfo $visa): JsonResponse
     {
-        return formatResponse(0, 200, 'Success', $visa);
+        $visa->load('service_agent', 'passenger_agent');
+        return formatResponse(0, 200, 'Successfully show', $visa);
     }
 
     /**
@@ -41,7 +42,7 @@ class VisaInfoController extends Controller
     public function update(UpdateVisaInfoRequest $request, VisaInfo $visa): JsonResponse
     {
         $this->visa->update($request->validated(), $visa);
-        return formatResponse(0, 200, 'Success', $visa->refresh());
+        return formatResponse(0, 200, 'Successfully update', $visa->refresh());
     }
 
     /**
