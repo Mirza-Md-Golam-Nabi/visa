@@ -6,24 +6,18 @@
             @include('msg')
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <form action="{{ route('applications.store') }}" method="POST" class="row g-3">
+                    <form method="POST" action="{{ route('passengers.update', $passenger) }}">
                         @csrf
-                        @include('includes.application.passenger')
+                        @method('PUT')
+                        @csrf
+                        @include('includes.application.passenger-update')
                         <div class="py-2">
                             <hr>
                         </div>
-                        @include('includes.application.passport')
-                        <div class="py-2">
-                            <hr>
-                        </div>
-                        @include('includes.application.visa')
-                        <div class="col-12">
-                            <button class="btn btn-primary" type="submit">Submit</button>
-                        </div>
-
+                        @include('includes.application.passport-update')
+                        <button type="submit" class="btn btn-primary">Update</button>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>

@@ -18,6 +18,8 @@
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{{ route('agents.index') }}">Agent</a></li>
                 <li><a class="dropdown-item" href="{{ route('visas.index') }}">Visa</a></li>
+                <li><a class="dropdown-item" href="{{ route('passengers.index') }}">Passenger</a></li>
+                <li><a class="dropdown-item" href="{{ route('medicals.index') }}">Medical</a></li>
                 <li>
                     <hr class="dropdown-divider">
                 </li>

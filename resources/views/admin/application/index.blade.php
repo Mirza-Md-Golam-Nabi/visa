@@ -17,11 +17,8 @@
                         <thead>
                             <tr>
                                 <th scope="col">S.N</th>
-                                <th scope="col">MOFA ID</th>
-                                <th scope="col">Passport No</th>
-                                <th scope="col">Visa No</th>
-                                <th scope="col">Sponsor ID</th>
-                                <th scope="col">Sponsor Name</th>
+                                <th scope="col">Passenger Name</th>
+                                <th scope="col">Passport ID</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -29,11 +26,8 @@
                             @foreach ($applications as $application)
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
-                                    <td>{{ $application->mofa_new_id }}</td>
-                                    <td>{{ $application->passport_info->passport_no }}</td>
-                                    <td>{{ $application->visa_info->visa_no }}</td>
-                                    <td>{{ $application->visa_info->sponsor_id }}</td>
-                                    <td>{{ $application->visa_info->sponsor_name }}</td>
+                                    <td>{{ $application->passenger_name }}</td>
+                                    <td>{{ $application->passport->passport_no }}</td>
                                     <td>
                                         <a href="{{ route('applications.edit', $application) }}" title="Print"
                                             class="text-primary">

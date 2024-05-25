@@ -3,11 +3,25 @@
 namespace App\Enum;
 
 enum LicenseTypeEnum: string {
-    case HEAVY = 'Heavy';
-    case MEDIUM = 'Medium';
-    case LIGHT = 'Light';
-    case MOTORCYCLE = 'Motorcycle';
-    case THREE_WHEELERS = 'Three-Wheelers';
-    case PSV = 'PSV';
-    case OTHER = 'Other';
+    case HEAVY = 'heavy';
+    case MEDIUM = 'medium';
+    case LIGHT = 'light';
+    case MOTORCYCLE = 'motorcycle';
+    case THREE_WHEELERS = 'three_wheelers';
+    case PSV = 'psv';
+    case OTHER = 'other';
+
+    public function description(): string
+    {
+        return match ($this) {
+            self::HEAVY => 'Heavy',
+            self::MEDIUM => 'Medium',
+            self::LIGHT => 'Light',
+            self::MOTORCYCLE => 'Motorcycle',
+            self::THREE_WHEELERS => 'Three-Wheelers',
+            self::PSV => 'PSV',
+            self::OTHER => 'Other',
+        };
+    }
+
 }

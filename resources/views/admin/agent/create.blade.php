@@ -19,7 +19,7 @@
                                             {{ $agent_type->description() }}</option>
                                     @endforeach
                                 </select>
-                                @error('gender')
+                                @error('agent_type')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -33,7 +33,7 @@
                                             {{ $agent_group->value }}</option>
                                     @endforeach
                                 </select>
-                                @error('gender')
+                                @error('agent_group')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>

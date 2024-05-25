@@ -10,7 +10,8 @@ enum VisaCategoryEnum: string {
     case HOUSE_DRIVER = 'house_driver';
     case AGRICULTURAL_WORKER = 'agricultural_worker';
 
-    public function description() {
+    public function description()
+    {
         return match ($this) {
             self::NORMAL_FACTOR => 'Normal Factor',
             self::HOUSE_WORKER => 'House Worker',

@@ -47,4 +47,9 @@ class VisaInfo extends Model
     {
         return $this->belongsTo(Agent::class, 'passenger_agent_id', 'id');
     }
+
+    public static function getVisaAndSponsorId()
+    {
+        return self::select('id', 'visa_no', 'sponsor_id')->get();
+    }
 }

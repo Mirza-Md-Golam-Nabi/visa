@@ -3,6 +3,14 @@
 namespace App\Enum;
 
 enum ReligionEnum: string {
-    case MUSLIM = 'Muslim';
-    case NON_MUSLIM = 'Non-muslim';
+    case MUSLIM = 'muslim';
+    case NON_MUSLIM = 'non_muslim';
+
+    public function description(): string
+    {
+        return match ($this) {
+            self::MUSLIM => 'Muslim',
+            self::NON_MUSLIM => 'Non Muslim',
+        };
+    }
 }

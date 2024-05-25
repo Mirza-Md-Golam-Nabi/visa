@@ -24,6 +24,18 @@ class VisaInfoSeeder extends Seeder
                 "group_no": "778",
                 "copile_name_arabic": "test",
                 "comment": "Test Visa"
+            },
+            {
+                "country": "Saudi Arabia",
+                "passenger_agent_id": "2",
+                "service_agent_id": "1",
+                "visa_no": "AA 958 KLO 885",
+                "category": "house_driver",
+                "quantity": "7",
+                "sponsor_id": "1232123",
+                "group_no": "889",
+                "copile_name_arabic": "test",
+                "comment": "Test Visa"
             }
         ]';
 

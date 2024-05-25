@@ -5,6 +5,7 @@ namespace App\Services\Application;
 use App\Models\PersonalInfo;
 use App\Services\LegalDocument\LegalDocumentService;
 use App\Services\OtherInfo\OtherInfoService;
+use App\Services\Passenger\PassengerService;
 use App\Services\PassportInfo\PassportInfoService;
 use App\Services\PersonalInfo\PersonalInfoService;
 use App\Services\VisaInfo\VisaInfoService;
@@ -14,21 +15,19 @@ use Illuminate\Support\Facades\Log;
 
 class ApplicationService
 {
+    protected $passenger_service;
+
     /**
      * Create a new class instance.
      */
     public function __construct()
     {
-        //
+        $this->passenger_service = new PassengerService;
     }
 
     public function index(): object
     {
-        $applications = PersonalInfo::with('passport_info',
-            'visa_info',
-            'legal_document',
-            'other_info')->get();
-        return $applications;
+        return $this->passenger_service->index();
     }
 
     public function store(array $data): mixed

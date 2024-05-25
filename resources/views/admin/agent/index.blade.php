@@ -18,6 +18,7 @@
                             <tr>
                                 <th scope="col">S.N</th>
                                 <th scope="col">Name</th>
+                                <th scope="col">Agent Type</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -26,6 +27,7 @@
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $agent->name }}</td>
+                                    <td>{{ $agent->agent_type->description() }}</td>
                                     <td>
                                         <a href="{{ route('agents.show', $agent) }}" title="show"
                                             class="mr-2 text-success">

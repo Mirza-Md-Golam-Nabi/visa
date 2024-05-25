@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\District;
+use App\Models\Passenger;
+use App\Models\VisaInfo;
 use Illuminate\Http\Request;
 
 class GeneralController extends Controller
@@ -23,5 +25,13 @@ class GeneralController extends Controller
             $output = '<option value="">No Data Found</option>';
         }
         return $output;
+    }
+
+    public function passengerFetch(Request $request)
+    {
+        $job_id = $request->get('job_id');
+        $passenger = Passenger::where('id', $job_id)->select('id', 'passenger_name')->first();
+
+        return $passenger;
     }
 }

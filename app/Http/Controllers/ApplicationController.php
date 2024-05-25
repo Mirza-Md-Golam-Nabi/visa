@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\AgentGroupEnum;
+use App\Enum\AgentTypeEnum;
 use App\Enum\GenderEnum;
-use App\Models\Religion;
-use App\Models\LicenseType;
-use App\Models\MaritalStatus;
-use App\Models\TravelPurpose;
-use App\Services\Application\ApplicationService;
+use App\Enum\MaritalStatusEnum;
+use App\Enum\PassengerCurrentStatusEnum;
+use App\Enum\PassportTypeEnum;
+use App\Enum\ReligionEnum;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Application\StoreApplicationRequest;
+use App\Models\Agent;
+use App\Models\District;
+use App\Models\Division;
+use App\Models\VisaInfo;
+use App\Services\Application\ApplicationService;
 
 class ApplicationController extends Controller
 {
@@ -33,13 +40,25 @@ class ApplicationController extends Controller
      */
     public function create()
     {
-        $genders = GenderEnum::cases();
-        $marital_statuses = MaritalStatus::orderBy('title', 'asc')->get();
-        $religions = Religion::orderBy('title', 'asc')->get();
-        $travel_purposes = TravelPurpose::orderBy('title', 'asc')->get();
-        $license_types = LicenseType::orderBy('title', 'asc')->get();
+        $service_agents = Agent::select('id', 'name')
+            ->where('agent_type', AgentTypeEnum::SERVICE_AGENT)
+            ->get();
 
-        return view('admin.application.create', compact('genders', 'marital_statuses', 'religions', 'travel_purposes', 'license_types'));
+        $passenger_agents = Agent::select('id', 'name')
+            ->where('agent_type', AgentTypeEnum::PASSENGER_AGENT)
+            ->get();
+
+        $genders = GenderEnum::cases();
+        $religions = ReligionEnum::cases();
+        $marital_statuses = MaritalStatusEnum::cases();
+        $passenger_types = AgentGroupEnum::cases();
+        $divisions = Division::orderBy('name', 'asc')->get();
+        $districts = District::orderBy('name', 'asc')->get();
+        $current_statuses = PassengerCurrentStatusEnum::cases();
+        $passport_types = PassportTypeEnum::cases();
+        $visas = VisaInfo::getVisaAndSponsorId();
+
+        return view('admin.application.create', compact('service_agents', 'passenger_agents', 'genders', 'religions', 'marital_statuses', 'passenger_types', 'districts', 'divisions', 'current_statuses', 'passport_types', 'visas'));
     }
 
     /**
@@ -48,7 +67,6 @@ class ApplicationController extends Controller
     public function store(StoreApplicationRequest $request)
     {
         $application = $this->application->store($request->validated());
-
 
         if ($application) {
             session()->flash('success', 'Create new application.');

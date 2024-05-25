@@ -3,6 +3,8 @@
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\GeneralController;
+use App\Http\Controllers\MedicalController;
+use App\Http\Controllers\PassengerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VisaInfoController;
 use Illuminate\Support\Facades\Route;
@@ -13,6 +15,7 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'fetch'], function () {
     Route::get('/district', [GeneralController::class, 'districtFetch'])->name('general.fetch.district');
+    Route::get('/passenger', [GeneralController::class, 'passengerFetch'])->name('general.fetch.passenger');
 });
 
 Route::get('/dashboard', function () {
@@ -27,7 +30,9 @@ Route::middleware('auth')->group(function () {
     Route::resources([
         'agents' => AgentController::class,
         'visas' => VisaInfoController::class,
+        'passengers' => PassengerController::class,
         'applications' => ApplicationController::class,
+        'medicals' => MedicalController::class,
     ]);
 });
 
