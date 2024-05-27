@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\District;
 use App\Models\Passenger;
-use App\Models\VisaInfo;
 use Illuminate\Http\Request;
 
 class GeneralController extends Controller
@@ -31,6 +30,32 @@ class GeneralController extends Controller
     {
         $job_id = $request->get('job_id');
         $passenger = Passenger::where('id', $job_id)->select('id', 'passenger_name')->first();
+
+        return $passenger;
+    }
+
+    public function passengerAllDataFetch(Request $request)
+    {
+        $job_id = $request->get('job_id');
+        $passenger = Passenger::with(
+            'passenger_agent',
+            'service_agent',
+            'division',
+            'district',
+            'passport',
+            'passport.passport_issue'
+        )
+            ->where('id', $job_id)
+            ->first();
+
+        if ($passenger) {
+            $passenger->gender_value = $passenger->gender->description();
+            $passenger->religion_value = $passenger->religion->description();
+            $passenger->marital_status_value = $passenger->marital_status->description();
+            $passenger->passenger_type_value = $passenger->passenger_type->description();
+            $passenger->current_status_value = $passenger->current_status->description();
+            $passenger->passport->passport_type_value = $passenger->passport->passport_type->description();
+        }
 
         return $passenger;
     }

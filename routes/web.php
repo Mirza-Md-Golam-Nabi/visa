@@ -16,6 +16,7 @@ Route::get('/', function () {
 Route::group(['prefix' => 'fetch'], function () {
     Route::get('/district', [GeneralController::class, 'districtFetch'])->name('general.fetch.district');
     Route::get('/passenger', [GeneralController::class, 'passengerFetch'])->name('general.fetch.passenger');
+    Route::get('/passenger-all-data', [GeneralController::class, 'passengerAllDataFetch'])->name('general.fetch.passenger.all.data');
 });
 
 Route::get('/dashboard', function () {
@@ -31,8 +32,8 @@ Route::middleware('auth')->group(function () {
         'agents' => AgentController::class,
         'visas' => VisaInfoController::class,
         'passengers' => PassengerController::class,
-        'applications' => ApplicationController::class,
         'medicals' => MedicalController::class,
+        'applications' => ApplicationController::class,
     ]);
 });
 
