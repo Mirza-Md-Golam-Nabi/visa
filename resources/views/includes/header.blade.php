@@ -6,7 +6,7 @@
 
 <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ __('Dashboard') }}
+        {{ $title ?? '' }}
     </h2>
     <ul class="flex nav">
         <li class="nav-item">
@@ -19,11 +19,13 @@
                 <li><a class="dropdown-item" href="{{ route('agents.index') }}">Agent</a></li>
                 <li><a class="dropdown-item" href="{{ route('visas.index') }}">Visa</a></li>
                 <li><a class="dropdown-item" href="{{ route('passengers.index') }}">Passenger</a></li>
+                <li><a class="dropdown-item" href="{{ route('visa.with.passenger.form') }}">Visa with Passenger</a></li>
                 <li><a class="dropdown-item" href="{{ route('medicals.index') }}">Medical</a></li>
                 <li>
                     <hr class="dropdown-divider">
                 </li>
                 <li><a class="dropdown-item" href="{{ route('applications.index') }}">Applications</a></li>
+                <li><a class="dropdown-item" href="{{ route('passenger-visas.index') }}">Visa Details</a></li>
             </ul>
         </li>
         <li class="nav-item">

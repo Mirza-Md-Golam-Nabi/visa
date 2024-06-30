@@ -2,13 +2,13 @@
 
 namespace App\Http\Requests\Passenger;
 
-use App\Enum\AgentGroupEnum;
-use App\Enum\AgentTypeEnum;
-use App\Enum\GenderEnum;
-use App\Enum\MaritalStatusEnum;
-use App\Enum\PassengerCurrentStatusEnum;
-use App\Enum\PassportTypeEnum;
-use App\Enum\ReligionEnum;
+use App\Enums\AgentGroupEnum;
+use App\Enums\AgentTypeEnum;
+use App\Enums\GenderEnum;
+use App\Enums\MaritalStatusEnum;
+use App\Enums\PassengerCurrentStatusEnum;
+use App\Enums\PassportTypeEnum;
+use App\Enums\ReligionEnum;
 use App\Rules\NationalId;
 use App\Rules\PhoneNumber;
 use Illuminate\Contracts\Validation\Validator;

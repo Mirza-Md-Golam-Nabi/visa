@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Enum\AgentGroupEnum;
-use App\Enum\AgentTypeEnum;
-use App\Enum\GenderEnum;
+use App\Enums\AgentGroupEnum;
+use App\Enums\AgentTypeEnum;
+use App\Enums\GenderEnum;
 use App\Http\Requests\Agent\StoreAgentRequest;
 use App\Http\Requests\Agent\UpdateAgentRequest;
 use App\Models\Agent;
@@ -15,9 +15,11 @@ use App\Services\Agent\AgentService;
 class AgentController extends Controller
 {
     protected $agent;
+    protected $title;
 
     public function __construct()
     {
+        $this->title = 'Agent';
         $this->agent = new AgentService();
     }
 
@@ -26,8 +28,9 @@ class AgentController extends Controller
      */
     public function index()
     {
+        $title = $this->title;
         $agents = $this->agent->index();
-        return view('admin.agent.index', compact('agents'));
+        return view('admin.agent.index', compact('title', 'agents'));
     }
 
     /**
@@ -35,12 +38,13 @@ class AgentController extends Controller
      */
     public function create()
     {
+        $title = $this->title;
         $agent_types = AgentTypeEnum::cases();
         $agent_groups = AgentGroupEnum::cases();
         $genders = GenderEnum::cases();
         $divisions = Division::orderBy('name', 'asc')->get();
 
-        return view('admin.agent.create', compact('agent_types', 'agent_groups', 'genders', 'divisions'));
+        return view('admin.agent.create', compact('title', 'agent_types', 'agent_groups', 'genders', 'divisions'));
     }
 
     /**
@@ -65,8 +69,9 @@ class AgentController extends Controller
      */
     public function show(Agent $agent)
     {
+        $title = $this->title;
         $agent->load('division', 'district');
-        return view('admin.agent.show', compact('agent'));
+        return view('admin.agent.show', compact('title', 'agent'));
     }
 
     /**
@@ -74,6 +79,7 @@ class AgentController extends Controller
      */
     public function edit(Agent $agent)
     {
+        $title = $this->title;
         $agent_types = AgentTypeEnum::cases();
         $agent_groups = AgentGroupEnum::cases();
         $genders = GenderEnum::cases();
@@ -82,7 +88,7 @@ class AgentController extends Controller
             ->orderBy('name', 'asc')
             ->get();
 
-        return view('admin.agent.edit', compact('agent', 'agent_types', 'agent_groups', 'genders', 'divisions', 'districts'));
+        return view('admin.agent.edit', compact('title', 'agent', 'agent_types', 'agent_groups', 'genders', 'divisions', 'districts'));
     }
 
     /**

@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Agent;
 
-use App\Enum\AgentGroupEnum;
-use App\Enum\AgentTypeEnum;
-use App\Enum\GenderEnum;
+use App\Enums\AgentGroupEnum;
+use App\Enums\AgentTypeEnum;
+use App\Enums\GenderEnum;
 use App\Rules\NationalId;
 use App\Rules\PhoneNumber;
 use Illuminate\Contracts\Validation\Validator;

@@ -2,27 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Enum\AgentGroupEnum;
-use App\Enum\AgentTypeEnum;
-use App\Enum\GenderEnum;
-use App\Enum\MaritalStatusEnum;
-use App\Enum\PassengerCurrentStatusEnum;
-use App\Enum\PassportTypeEnum;
-use App\Enum\ReligionEnum;
+use App\Enums\AgentGroupEnum;
+use App\Enums\AgentTypeEnum;
+use App\Enums\GenderEnum;
+use App\Enums\MaritalStatusEnum;
+use App\Enums\PassengerCurrentStatusEnum;
+use App\Enums\PassportTypeEnum;
+use App\Enums\ReligionEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Application\StoreApplicationRequest;
 use App\Models\Agent;
 use App\Models\District;
 use App\Models\Division;
+use App\Models\Passenger;
+use App\Models\PassengerVisa;
 use App\Models\VisaInfo;
 use App\Services\Application\ApplicationService;
+use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
 {
     protected $application;
+    protected $title;
 
     public function __construct()
     {
+        $this->title = 'Application';
         $this->application = new ApplicationService();
     }
 
@@ -31,8 +36,9 @@ class ApplicationController extends Controller
      */
     public function index()
     {
+        $title = $this->title;
         $applications = $this->application->index();
-        return view('admin.application.index', compact('applications'));
+        return view('admin.application.index', compact('title', 'applications'));
     }
 
     /**
@@ -40,6 +46,8 @@ class ApplicationController extends Controller
      */
     public function create()
     {
+        $title = $this->title;
+
         $service_agents = Agent::select('id', 'name')
             ->where('agent_type', AgentTypeEnum::SERVICE_AGENT)
             ->get();
@@ -58,7 +66,7 @@ class ApplicationController extends Controller
         $passport_types = PassportTypeEnum::cases();
         $visas = VisaInfo::getVisaAndSponsorId();
 
-        return view('admin.application.create', compact('service_agents', 'passenger_agents', 'genders', 'religions', 'marital_statuses', 'passenger_types', 'districts', 'divisions', 'current_statuses', 'passport_types', 'visas'));
+        return view('admin.application.create', compact('title', 'service_agents', 'passenger_agents', 'genders', 'religions', 'marital_statuses', 'passenger_types', 'districts', 'divisions', 'current_statuses', 'passport_types', 'visas'));
     }
 
     /**
@@ -76,5 +84,32 @@ class ApplicationController extends Controller
             return redirect()->back()->withInput();
         }
 
+    }
+
+    public function visaWithPassengerForm()
+    {
+        $title = 'Visa with Passenger';
+        $passengers = Passenger::get();
+        $visas = VisaInfo::get();
+        $passenger_visas = PassengerVisa::with('passenger', 'visa_info')->orderBy('id', 'desc')->get();
+        return view('admin.application.visa-with-passenger', compact('title', 'passengers', 'visas', 'passenger_visas'));
+    }
+
+    public function visaWithPassenger(Request $request)
+    {
+        $validated = $request->validate([
+            'passenger_id' => 'required',
+            'visa_info_id' => 'required',
+        ]);
+
+        $passenger_visa = PassengerVisa::create($validated);
+
+        if ($passenger_visa) {
+            session()->flash('success', 'Attached a visa for a passenger');
+        } else {
+            session()->flash('error', 'Visa does not attach for a passenger');
+        }
+
+        return redirect()->route('visa.with.passenger.form');
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Medical;
 
-use App\Enum\BioSubmissionStatusEnum;
-use App\Enum\PassengerCurrentStatusEnum;
+use App\Enums\BioSubmissionStatusEnum;
+use App\Enums\PassengerCurrentStatusEnum;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;

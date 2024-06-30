@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Enum\BioSubmissionStatusEnum;
-use App\Enum\PassengerCurrentStatusEnum;
+use App\Enums\BioSubmissionStatusEnum;
+use App\Enums\PassengerCurrentStatusEnum;
 use App\Models\MedicalCenter;
 use App\Models\Passenger;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

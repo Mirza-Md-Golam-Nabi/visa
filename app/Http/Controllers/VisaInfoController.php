@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Enum\AgentTypeEnum;
-use App\Enum\VisaCategoryEnum;
+use App\Enums\AgentTypeEnum;
+use App\Enums\VisaCategoryEnum;
 use App\Http\Requests\Visa\StoreVisaInfoRequest;
 use App\Http\Requests\Visa\UpdateVisaInfoRequest;
 use App\Models\Agent;
@@ -13,9 +13,11 @@ use App\Services\VisaInfo\VisaInfoService;
 class VisaInfoController extends Controller
 {
     protected $visa;
+    protected $title;
 
     public function __construct()
     {
+        $this->title = 'Visa';
         $this->visa = new VisaInfoService();
     }
 
@@ -24,8 +26,9 @@ class VisaInfoController extends Controller
      */
     public function index()
     {
+        $title = $this->title;
         $visas = $this->visa->index();
-        return view('admin.visa.index', compact('visas'));
+        return view('admin.visa.index', compact('title', 'visas'));
     }
 
     /**
@@ -33,6 +36,7 @@ class VisaInfoController extends Controller
      */
     public function create()
     {
+        $title = $this->title;
         $service_agents = Agent::select('id', 'name')
             ->where('agent_type', AgentTypeEnum::SERVICE_AGENT)
             ->get();
@@ -43,7 +47,7 @@ class VisaInfoController extends Controller
 
         $visa_categories = VisaCategoryEnum::cases();
 
-        return view('admin.visa.create', compact('service_agents', 'passenger_agents', 'visa_categories'));
+        return view('admin.visa.create', compact('title', 'service_agents', 'passenger_agents', 'visa_categories'));
     }
 
     /**
@@ -68,8 +72,9 @@ class VisaInfoController extends Controller
      */
     public function show(VisaInfo $visa)
     {
+        $title = $this->title;
         $visa->load('service_agent', 'passenger_agent');
-        return view('admin.visa.show', compact('visa'));
+        return view('admin.visa.show', compact('title', 'visa'));
     }
 
     /**
@@ -77,6 +82,7 @@ class VisaInfoController extends Controller
      */
     public function edit(VisaInfo $visa)
     {
+        $title = $this->title;
         $service_agents = Agent::select('id', 'name')
             ->where('agent_type', AgentTypeEnum::SERVICE_AGENT)
             ->get();
@@ -87,7 +93,7 @@ class VisaInfoController extends Controller
 
         $visa_categories = VisaCategoryEnum::cases();
 
-        return view('admin.visa.edit', compact('visa', 'service_agents', 'passenger_agents', 'visa_categories'));
+        return view('admin.visa.edit', compact('title', 'visa', 'service_agents', 'passenger_agents', 'visa_categories'));
     }
 
     /**

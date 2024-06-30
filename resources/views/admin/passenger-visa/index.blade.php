@@ -6,44 +6,39 @@
             @include('msg')
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <div class="flex justify-content-end mb-2">
-                        <a href="{{ route('applications.create') }}">
-                            <button class="btn btn-primary">
-                                Applicaiton Create
-                            </button>
-                        </a>
-                    </div>
                     <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th scope="col">S.N</th>
                                 <th scope="col">Passenger Name</th>
-                                <th scope="col">Passport ID</th>
+                                <th scope="col">Contact No</th>
+                                <th scope="col">Visa No</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($applications as $application)
+                            @foreach ($passenger_visas as $passenger_visa)
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
-                                    <td>{{ $application->passenger_name }}</td>
-                                    <td>{{ $application->passport->passport_no ?? '' }}</td>
+                                    <td>{{ $passenger_visa->passenger->passenger_name }}</td>
+                                    <td>{{ $passenger_visa->passenger->contact_no }}</td>
+                                    <td>{{ $passenger_visa->visa_info->visa_no }}</td>
                                     <td>
-                                        <a href="{{ route('applications.edit', $application) }}" title="Print"
-                                            class="text-primary">
-                                            <i class="bi bi-printer"></i>
+                                        <a href="{{ route('passenger-visas.create', ['passenger_visa' => $passenger_visa]) }}"
+                                            title="Print" class="text-success">
+                                            <i class="bi bi-plus-circle"></i>
                                         </a>
-                                        <a href="{{ route('applications.edit', $application) }}" title="Edit"
+                                        <a href="{{ route('passenger-visas.edit', $passenger_visa) }}" title="Edit"
                                             class="text-primary mx-2">
                                             <i class="bi bi-pencil"></i>
                                         </a>
                                         <a href="#" title="Delete" style="color: red"
-                                            onclick="event.preventDefault(); document.getElementById('religion-destroy{{ $application->id }}').submit();">
+                                            onclick="event.preventDefault(); document.getElementById('passenger-visa-destroy{{ $passenger_visa->id }}').submit();">
                                             <i class="bi bi-trash"></i>
                                         </a>
-                                        <form id="religion-destroy{{ $application->id }}"
-                                            action="{{ route('applications.destroy', $application) }}" method="POST"
-                                            class="d-none">
+                                        <form id="passenger-visa-destroy{{ $passenger_visa->id }}"
+                                            action="{{ route('passenger-visas.destroy', $passenger_visa) }}"
+                                            method="POST" class="d-none">
                                             @csrf
                                             @method('DELETE')
                                         </form>

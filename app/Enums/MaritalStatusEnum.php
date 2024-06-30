@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enum;
+namespace App\Enums;
 
 enum MaritalStatusEnum: string {
     case MARRIED = 'married';

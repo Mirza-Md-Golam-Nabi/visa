@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\District;
 use App\Models\Passenger;
+use App\Models\VisaInfo;
 use Illuminate\Http\Request;
 
 class GeneralController extends Controller
@@ -58,5 +59,13 @@ class GeneralController extends Controller
         }
 
         return $passenger;
+    }
+
+    public function visaFetch(Request $request)
+    {
+        $visa_id = $request->get('visa_id');
+        $visa = VisaInfo::where('id', $visa_id)->first();
+
+        return $visa;
     }
 }

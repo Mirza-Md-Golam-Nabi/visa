@@ -2,13 +2,10 @@
 
 namespace App\Services\Application;
 
-use App\Models\PersonalInfo;
-use App\Services\LegalDocument\LegalDocumentService;
-use App\Services\OtherInfo\OtherInfoService;
+use App\Models\Passenger;
+use App\Services\PassengerVisa\PassengerVisaService;
 use App\Services\Passenger\PassengerService;
-use App\Services\PassportInfo\PassportInfoService;
-use App\Services\PersonalInfo\PersonalInfoService;
-use App\Services\VisaInfo\VisaInfoService;
+use App\Services\Passport\PassportService;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -16,6 +13,8 @@ use Illuminate\Support\Facades\Log;
 class ApplicationService
 {
     protected $passenger_service;
+    protected $passport_service;
+    protected $passenger_visa_service;
 
     /**
      * Create a new class instance.
@@ -23,6 +22,8 @@ class ApplicationService
     public function __construct()
     {
         $this->passenger_service = new PassengerService;
+        $this->passport_service = new PassportService;
+        $this->passenger_visa_service = new PassengerVisaService;
     }
 
     public function index(): object
@@ -35,12 +36,10 @@ class ApplicationService
         try {
             DB::beginTransaction();
 
-            $personal = (new PersonalInfoService())->store($data);
-            $personal_id = ['personal_info_id' => $personal->id];
-            $passport = (new PassportInfoService())->store($data + $personal_id);
-            $visa = (new VisaInfoService())->store($data + $personal_id);
-            $legal_document = (new LegalDocumentService())->store($data + $personal_id);
-            $other_info = (new OtherInfoService())->store($data + $personal_id);
+            $passenger = $this->passenger_service->store($data);
+            $passenger_id = ['passenger_id' => $passenger->id];
+            $passport = $this->passport_service->store($data + $passenger_id);
+            $visa = $this->passenger_visa_service->store($data + $passenger_id);
 
             DB::commit();
         } catch (Exception $e) {
@@ -54,25 +53,21 @@ class ApplicationService
         }
 
         return [
-            'personal' => $personal,
+            'passenger' => $passenger,
             'passport' => $passport,
             'visa' => $visa,
-            'legal_document' => $legal_document,
-            'other_info' => $other_info,
         ];
     }
 
-    public function update(array $data, PersonalInfo $personal): array
+    public function update(array $data, Passenger $personal): array
     {
         try {
             DB::beginTransaction();
 
             $personal_id = $personal->id;
             $personal->update($data);
-            $passport = (new PassportInfoService())->update($data, $personal_id);
-            $visa = (new VisaInfoService())->update($data, $personal_id);
-            $legal_document = (new LegalDocumentService())->update($data, $personal_id);
-            $other_info = (new OtherInfoService())->update($data, $personal_id);
+            $passport = $this->passport_service->update($data, $personal_id);
+            $visa = $this->passenger_visa_service->update($data, $personal_id);
 
             DB::commit();
 
@@ -90,21 +85,17 @@ class ApplicationService
             'personal' => $personal,
             'passport' => $passport,
             'visa' => $visa,
-            'legal_document' => $legal_document,
-            'other_info' => $other_info,
         ];
     }
 
-    public function softDelete(PersonalInfo $personal)
+    public function softDelete(Passenger $personal)
     {
         try {
             DB::beginTransaction();
 
             $personal_id = $personal->id;
-            (new PassportInfoService())->softDelete($personal_id);
-            (new VisaInfoService())->softDelete($personal_id);
-            (new LegalDocumentService())->softDelete($personal_id);
-            (new OtherInfoService())->softDelete($personal_id);
+            $this->passport_service->softDelete($personal_id);
+            $this->passenger_visa_service->softDelete($personal_id);
 
             DB::commit();
 

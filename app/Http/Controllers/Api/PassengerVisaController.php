@@ -3,19 +3,20 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Application\StoreApplicationRequest;
 use App\Http\Requests\Application\UpdateApplicationRequest;
+use App\Http\Requests\PassengerVisa\StorePassengerVisaRequest;
 use App\Models\Passenger;
-use App\Services\Application\ApplicationService;
+use App\Models\PassengerVisa;
+use App\Services\PassengerVisa\PassengerVisaService;
 use Illuminate\Http\JsonResponse;
 
-class ApplicationController extends Controller
+class PassengerVisaController extends Controller
 {
-    protected $application;
+    protected $passenger_visa;
 
     public function __construct()
     {
-        $this->application = new ApplicationService();
+        $this->passenger_visa = new PassengerVisaService();
     }
 
     /**
@@ -23,19 +24,19 @@ class ApplicationController extends Controller
      */
     public function index(): JsonResponse
     {
-        $applications = $this->application->index();
-        return formatResponse(0, 200, 'Success', $applications);
+        $passenger_visas = $this->passenger_visa->index();
+        return formatResponse(0, 200, 'Success', $passenger_visas);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreApplicationRequest $request): JsonResponse
+    public function store(StorePassengerVisaRequest $request): JsonResponse
     {
-        $application = $this->application->store($request->validated());
+        $passenger_visa = $this->passenger_visa->visaDetailsUpdate($request->validated());
 
-        if ($application) {
-            return formatResponse(0, 200, 'Success', $application);
+        if ($passenger_visa) {
+            return formatResponse(0, 200, 'Success', $passenger_visa);
         }
 
         return formatResponse(1, 400, 'Something wrong happened', null);
@@ -44,18 +45,13 @@ class ApplicationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Passenger $application): JsonResponse
+    public function show(PassengerVisa $passenger_visa): JsonResponse
     {
-        $application->load('passenger_agent',
-            'service_agent',
-            'division',
-            'district',
-            'passport',
-            'passport.passport_issue',
-            'visa'
+        $passenger_visa->load('passenger',
+            'visa_info',
         );
 
-        return formatResponse(0, 200, 'Success', $application);
+        return formatResponse(0, 200, 'Success', $passenger_visa);
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enum;
+namespace App\Enums;
 
 enum VisaCategoryEnum: string {
     case NORMAL_FACTOR = 'normal_factor';

@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use App\Enum\AgentGroupEnum;
-use App\Enum\GenderEnum;
-use App\Enum\MaritalStatusEnum;
-use App\Enum\PassengerCurrentStatusEnum;
-use App\Enum\ReligionEnum;
+use App\Enums\AgentGroupEnum;
+use App\Enums\GenderEnum;
+use App\Enums\MaritalStatusEnum;
+use App\Enums\PassengerCurrentStatusEnum;
+use App\Enums\ReligionEnum;
 use App\Models\District;
 use App\Models\Division;
 use App\Models\Passport;
@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Passenger extends Model
@@ -82,5 +83,17 @@ class Passenger extends Model
     public function medical(): HasOne
     {
         return $this->hasOne(Medical::class, 'passenger_id', 'id');
+    }
+
+    public function visa(): HasOneThrough
+    {
+        return $this->hasOneThrough(
+            VisaInfo::class,
+            PassengerVisa::class,
+            'passenger_id',
+            'id',
+            'id',
+            'visa_info_id'
+        );
     }
 }

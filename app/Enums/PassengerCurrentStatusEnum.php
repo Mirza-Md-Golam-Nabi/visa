@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enum;
+namespace App\Enums;
 
 enum PassengerCurrentStatusEnum: string {
     case NEW_FILE = 'new_file';

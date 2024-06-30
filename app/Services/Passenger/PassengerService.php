@@ -22,7 +22,8 @@ class PassengerService
             'division',
             'district',
             'passport',
-            'passport.passport_issue'
+            'passport.passport_issue',
+            'visa'
         )
             ->orderBy('id', 'desc')
             ->get();

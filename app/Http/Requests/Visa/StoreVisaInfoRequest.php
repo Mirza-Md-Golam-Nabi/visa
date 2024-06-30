@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Visa;
 
-use App\Enum\AgentTypeEnum;
-use App\Enum\VisaCategoryEnum;
+use App\Enums\AgentTypeEnum;
+use App\Enums\VisaCategoryEnum;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Http\FormRequest;

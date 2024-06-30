@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Enum\AgentGroupEnum;
-use App\Enum\AgentTypeEnum;
-use App\Enum\GenderEnum;
+use App\Enums\AgentGroupEnum;
+use App\Enums\AgentTypeEnum;
+use App\Enums\GenderEnum;
 use App\Models\District;
 use App\Models\Division;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

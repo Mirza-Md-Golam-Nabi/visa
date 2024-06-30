@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enum;
+namespace App\Enums;
 
 enum AgentTypeEnum: string {
     case SERVICE_AGENT = 'service_agent';

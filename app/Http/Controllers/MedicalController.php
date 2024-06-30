@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Enum\BioSubmissionStatusEnum;
-use App\Enum\PassengerCurrentStatusEnum;
+use App\Enums\BioSubmissionStatusEnum;
+use App\Enums\PassengerCurrentStatusEnum;
 use App\Http\Requests\Medical\StoreMedicalRequest;
 use App\Http\Requests\Medical\UpdateMedicalRequest;
 use App\Models\Medical;
@@ -13,9 +13,11 @@ use App\Services\Medical\MedicalService;
 class MedicalController extends Controller
 {
     protected $medical;
+    protected $title;
 
     public function __construct()
     {
+        $this->title = 'Medical';
         $this->medical = new MedicalService();
     }
 
@@ -24,8 +26,9 @@ class MedicalController extends Controller
      */
     public function index()
     {
+        $title = $this->title;
         $medicals = $this->medical->index();
-        return view('admin.medical.index', compact('medicals'));
+        return view('admin.medical.index', compact('title', 'medicals'));
     }
 
     /**
@@ -33,12 +36,14 @@ class MedicalController extends Controller
      */
     public function create()
     {
+        $title = $this->title;
+
         $medical_centers = MedicalCenter::get();
         $medical_statuses = PassengerCurrentStatusEnum::cases();
         $current_statuses = PassengerCurrentStatusEnum::cases();
         $bio_submission_statuses = BioSubmissionStatusEnum::cases();
 
-        return view('admin.medical.create', compact('medical_centers', 'medical_statuses', 'current_statuses', 'bio_submission_statuses'));
+        return view('admin.medical.create', compact('title', 'medical_centers', 'medical_statuses', 'current_statuses', 'bio_submission_statuses'));
     }
 
     /**
@@ -63,8 +68,10 @@ class MedicalController extends Controller
      */
     public function show(Medical $medical)
     {
+        $title = $this->title;
+
         $medical->load('passenger', 'medical_center');
-        return view('admin.medical.show', compact('medical'));
+        return view('admin.medical.show', compact('title', 'medical'));
     }
 
     /**
@@ -72,6 +79,8 @@ class MedicalController extends Controller
      */
     public function edit(Medical $medical)
     {
+        $title = $this->title;
+
         $medical->load('passenger');
 
         $medical_centers = MedicalCenter::get();
@@ -80,7 +89,7 @@ class MedicalController extends Controller
         $bio_submission_statuses = BioSubmissionStatusEnum::cases();
         $calling_statuses = ['Yes', 'No'];
 
-        return view('admin.medical.edit', compact('medical', 'medical_centers', 'medical_statuses', 'current_statuses', 'bio_submission_statuses', 'calling_statuses'));
+        return view('admin.medical.edit', compact('title', 'medical', 'medical_centers', 'medical_statuses', 'current_statuses', 'bio_submission_statuses', 'calling_statuses'));
     }
 
     /**

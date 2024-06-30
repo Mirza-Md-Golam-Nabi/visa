@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enum;
+namespace App\Enums;
 
 enum ReligionEnum: string {
     case MUSLIM = 'muslim';

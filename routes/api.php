@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\Api\AgentController;
+use App\Http\Controllers\Api\ApplicationController;
 use App\Http\Controllers\Api\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Api\Auth\RegisteredUserController;
 use App\Http\Controllers\Api\MedicalController;
 use App\Http\Controllers\Api\PassengerController;
+use App\Http\Controllers\Api\PassengerVisaController;
 use App\Http\Controllers\Api\VisaInfoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +21,8 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('visas', VisaInfoController::class);
     Route::apiResource('passengers', PassengerController::class);
     Route::apiResource('medicals', MedicalController::class);
+    Route::apiResource('applications', ApplicationController::class);
+    Route::apiResource('passenger-visas', PassengerVisaController::class);
 
 });
 

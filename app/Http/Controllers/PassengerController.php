@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Enum\AgentGroupEnum;
-use App\Enum\AgentTypeEnum;
-use App\Enum\GenderEnum;
-use App\Enum\MaritalStatusEnum;
-use App\Enum\PassengerCurrentStatusEnum;
-use App\Enum\PassportTypeEnum;
-use App\Enum\ReligionEnum;
+use App\Enums\AgentGroupEnum;
+use App\Enums\AgentTypeEnum;
+use App\Enums\GenderEnum;
+use App\Enums\MaritalStatusEnum;
+use App\Enums\PassengerCurrentStatusEnum;
+use App\Enums\PassportTypeEnum;
+use App\Enums\ReligionEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Passenger\StorePassengerRequest;
 use App\Http\Requests\Passenger\UpdatePassengerRequest;
@@ -26,9 +26,11 @@ class PassengerController extends Controller
 {
     protected $passenger;
     protected $passport;
+    protected $title;
 
     public function __construct()
     {
+        $this->title = 'Passenger';
         $this->passenger = new PassengerService();
         $this->passport = new PassportService();
     }
@@ -38,8 +40,10 @@ class PassengerController extends Controller
      */
     public function index()
     {
+        $title = $this->title;
+
         $passengers = $this->passenger->index();
-        return view('admin.passenger.index', compact('passengers'));
+        return view('admin.passenger.index', compact('title', 'passengers'));
     }
 
     /**
@@ -47,6 +51,8 @@ class PassengerController extends Controller
      */
     public function create()
     {
+        $title = $this->title;
+
         $service_agents = Agent::select('id', 'name')
             ->where('agent_type', AgentTypeEnum::SERVICE_AGENT)
             ->get();
@@ -64,7 +70,7 @@ class PassengerController extends Controller
         $current_statuses = PassengerCurrentStatusEnum::cases();
         $passport_types = PassportTypeEnum::cases();
 
-        return view('admin.passenger.create', compact('service_agents', 'passenger_agents', 'genders', 'religions', 'marital_statuses', 'passenger_types', 'divisions', 'districts', 'current_statuses', 'passport_types'));
+        return view('admin.passenger.create', compact('title', 'service_agents', 'passenger_agents', 'genders', 'religions', 'marital_statuses', 'passenger_types', 'divisions', 'districts', 'current_statuses', 'passport_types'));
     }
 
     /**
@@ -102,6 +108,8 @@ class PassengerController extends Controller
      */
     public function show(Passenger $passenger)
     {
+        $title = $this->title;
+
         $passenger->load(
             'passenger_agent',
             'service_agent',
@@ -111,7 +119,7 @@ class PassengerController extends Controller
             'passport.passport_issue'
         );
 
-        return view('admin.passenger.show', compact('passenger'));
+        return view('admin.passenger.show', compact('title', 'passenger'));
     }
 
     /**
@@ -119,6 +127,8 @@ class PassengerController extends Controller
      */
     public function edit(Passenger $passenger)
     {
+        $title = $this->title;
+
         $service_agents = Agent::select('id', 'name')
             ->where('agent_type', AgentTypeEnum::SERVICE_AGENT)
             ->get();
@@ -137,7 +147,7 @@ class PassengerController extends Controller
         $current_statuses = PassengerCurrentStatusEnum::cases();
         $passport_types = PassportTypeEnum::cases();
 
-        return view('admin.passenger.edit', compact('passenger', 'service_agents', 'passenger_agents', 'genders', 'religions', 'marital_statuses', 'passenger_types', 'divisions', 'dist', 'districts', 'current_statuses', 'passport_types'));
+        return view('admin.passenger.edit', compact('title', 'passenger', 'service_agents', 'passenger_agents', 'genders', 'religions', 'marital_statuses', 'passenger_types', 'divisions', 'dist', 'districts', 'current_statuses', 'passport_types'));
     }
 
     /**
