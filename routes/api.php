@@ -17,12 +17,14 @@ Route::post('login', [AuthenticatedSessionController::class, 'store']);
 Route::middleware('auth:api')->group(function () {
     Route::get('logout', [AuthenticatedSessionController::class, 'destroy']);
 
-    Route::apiResource('agents', AgentController::class);
-    Route::apiResource('visas', VisaInfoController::class);
-    Route::apiResource('passengers', PassengerController::class);
-    Route::apiResource('medicals', MedicalController::class);
-    Route::apiResource('applications', ApplicationController::class);
-    Route::apiResource('passenger-visas', PassengerVisaController::class);
+    Route::apiResources([
+        'agents' => AgentController::class,
+        'visas' => VisaInfoController::class,
+        'passengers' => PassengerController::class,
+        'medicals' => MedicalController::class,
+        'applications' => ApplicationController::class,
+        'passenger-visas' => PassengerVisaController::class,
+    ]);
 
 });
 
