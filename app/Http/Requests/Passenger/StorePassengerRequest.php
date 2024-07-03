@@ -98,6 +98,8 @@ class StorePassengerRequest extends FormRequest
             $response = failedValidationForApi($validator);
         }
 
+        session()->flash('error', 'You provide an invalid data.');
+
         $exception = $validator->getException();
 
         throw (new $exception($validator, $response))

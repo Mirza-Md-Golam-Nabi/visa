@@ -6,15 +6,7 @@
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <form method="POST" action="{{ route('religions.update', $religion) }}">
-                        @csrf
-                        @method('PUT')
-                        <div class="mb-3">
-                            <label for="title" class="form-label">Religion Title</label>
-                            <input type="text" class="form-control" name="title" id="title" value="{{ old('title') ?? $religion->title }}">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Update</button>
-                    </form>
+                    <h4>Will be developed later.</h4>
                 </div>
             </div>
         </div>

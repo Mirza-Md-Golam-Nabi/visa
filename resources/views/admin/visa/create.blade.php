@@ -108,7 +108,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="copile_name_arabic" class="form-label">Copile Name Arabic</label>
-                                <input type="text"
+                                <input type="text" style="direction: rtl"
                                     class="form-control @error('copile_name_arabic') is-invalid @enderror"
                                     name="copile_name_arabic" id="copile_name_arabic"
                                     value="{{ old('copile_name_arabic') }}">

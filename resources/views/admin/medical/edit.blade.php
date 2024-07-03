@@ -19,9 +19,10 @@
                                     value="{{ $medical->passenger_id }}">
                             </div>
                             <div class="col-md-4">
-                                <label for="medical_center_id" class="form-label">Medical Center</label>
+                                <label for="medical_center_id" class="form-label">Medical Center <span
+                                        class="text-danger">*</span></label>
                                 <select name="medical_center_id" id="medical_center_id"
-                                    class="form-control @error('medical_center_id') is-invalid @enderror">
+                                    class="form-control @error('medical_center_id') is-invalid @enderror" required>
                                     <option value="">Select one</option>
                                     @foreach ($medical_centers as $medical_center)
                                         @php
@@ -38,11 +39,12 @@
                                 @enderror
                             </div>
                             <div class="col-md-4">
-                                <label for="medical_serial_no" class="form-label">Medical Serial No</label>
+                                <label for="medical_serial_no" class="form-label">Medical Serial No <span
+                                        class="text-danger">*</span></label>
                                 <input type="text"
                                     class="form-control @error('medical_serial_no') is-invalid @enderror"
                                     name="medical_serial_no" id="medical_serial_no"
-                                    value="{{ old('medical_serial_no') ?? $medical->medical_serial_no }}">
+                                    value="{{ old('medical_serial_no') ?? $medical->medical_serial_no }}" required>
                                 @error('medical_serial_no')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -50,29 +52,32 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-4">
-                                <label for="medical_exam_issue_date" class="form-label">Medical Exam/Issue Date</label>
+                                <label for="medical_exam_issue_date" class="form-label">Medical Exam/Issue Date <span
+                                        class="text-danger">*</span></label>
                                 <input type="date"
                                     class="form-control @error('medical_exam_issue_date') is-invalid @enderror"
                                     name="medical_exam_issue_date" id="medical_exam_issue_date"
-                                    value="{{ old('medical_exam_issue_date') ?? $medical->medical_exam_issue_date }}">
+                                    value="{{ old('medical_exam_issue_date') ?? $medical->medical_exam_issue_date }}" required>
                                 @error('medical_exam_issue_date')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-md-4">
                                 <label for="medical_report_expire_date" class="form-label">Medical Report/Expire
-                                    Date</label>
+                                    Date <span
+                                        class="text-danger">*</span></label>
                                 <input type="date" name="medical_report_expire_date" id="medical_report_expire_date"
                                     class="form-control @error('medical_report_expire_date') is-invalid @enderror"
-                                    value="{{ old('medical_report_expire_date') ?? $medical->medical_report_expire_date }}">
+                                    value="{{ old('medical_report_expire_date') ?? $medical->medical_report_expire_date }}" required>
                                 @error('medical_report_expire_date')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-md-4">
-                                <label for="medical_status" class="form-label">Medical Status</label>
+                                <label for="medical_status" class="form-label">Medical Status <span
+                                        class="text-danger">*</span></label>
                                 <select class="form-control @error('medical_status') is-invalid @enderror"
-                                    name="medical_status" id="medical_status">
+                                    name="medical_status" id="medical_status" required>
                                     <option value="">Select One</option>
                                     @foreach ($medical_statuses as $medical_status)
                                         @php
@@ -100,9 +105,10 @@
                                 @enderror
                             </div>
                             <div class="col-md-4">
-                                <label for="current_status" class="form-label">Current Status</label>
+                                <label for="current_status" class="form-label">Current Status <span
+                                        class="text-danger">*</span></label>
                                 <select class="form-control @error('current_status') is-invalid @enderror"
-                                    name="current_status" id="current_status">
+                                    name="current_status" id="current_status" required>
                                     <option value="">Select One</option>
                                     @foreach ($current_statuses as $current_status)
                                         @php
@@ -129,18 +135,20 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-4">
-                                <label for="bio_submit_date" class="form-label">BIO Submission Date</label>
+                                <label for="bio_submit_date" class="form-label">BIO Submission Date <span
+                                        class="text-danger">*</span></label>
                                 <input type="date" name="bio_submit_date" id="bio_submit_date"
                                     class="form-control @error('bio_submit_date') is-invalid @enderror"
-                                    value="{{ old('bio_submit_date') ?? $medical->bio_submit_date }}">
+                                    value="{{ old('bio_submit_date') ?? $medical->bio_submit_date }}" required>
                                 @error('bio_submit_date')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-md-4">
-                                <label for="bio_submit_status" class="form-label">BIO Submission Status</label>
+                                <label for="bio_submit_status" class="form-label">BIO Submission Status <span
+                                        class="text-danger">*</span></label>
                                 <select name="bio_submit_status" id="bio_submit_status"
-                                    class="form-control @error('bio_submit_status') is-invalid @enderror">
+                                    class="form-control @error('bio_submit_status') is-invalid @enderror" required>
                                     <option value="">Select one</option>
                                     @foreach ($bio_submission_statuses as $bio_submission_status)
                                         @php
@@ -158,10 +166,11 @@
                                 @enderror
                             </div>
                             <div class="col-md-4">
-                                <label for="calling_date" class="form-label">Calling Date</label>
+                                <label for="calling_date" class="form-label">Calling Date <span
+                                        class="text-danger">*</span></label>
                                 <input type="date" name="calling_date" id="calling_date"
                                     class="form-control @error('calling_date') is-invalid @enderror"
-                                    value="{{ old('calling_date') ?? $medical->calling_date }}">
+                                    value="{{ old('calling_date') ?? $medical->calling_date }}" required>
                                 @error('calling_date')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -169,9 +178,10 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-4">
-                                <label for="calling_status" class="form-label">Calling Status</label>
+                                <label for="calling_status" class="form-label">Calling Status <span
+                                        class="text-danger">*</span></label>
                                 <select name="calling_status" id="calling_status"
-                                    class="form-control @error('calling_status') is-invalid @enderror">
+                                    class="form-control @error('calling_status') is-invalid @enderror" required>
                                     <option value="">Select one</option>
                                     @foreach ($calling_statuses as $calling_status)
                                         @php

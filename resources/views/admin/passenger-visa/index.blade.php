@@ -26,7 +26,7 @@
                                     <td>
                                         <a href="{{ route('passenger-visas.create', ['passenger_visa' => $passenger_visa]) }}"
                                             title="Print" class="text-success">
-                                            <i class="bi bi-plus-circle"></i>
+                                            <i class="bi bi-filetype-pdf"></i>
                                         </a>
                                         <a href="{{ route('passenger-visas.edit', $passenger_visa) }}" title="Edit"
                                             class="text-primary mx-2">

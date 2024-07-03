@@ -7,21 +7,6 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <h3 class="mb-3 text-primary">Visa Details</h3>
-                    <div class="d-flex justify-content-center align-items-center">
-                        <div>
-                            <label for="job_id" class="form-label"><b>Enter Passenger JOB ID</b></label>
-                        </div>
-                        <div class="px-4">
-                            <input type="text" class="form-control" id="job_id">
-                        </div>
-                        <div>
-                            <span class="btn btn-sm btn-primary" id="find_job_id">Search</span>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <span class="" id="search_result"></span>
-                    </div>
-                    <hr>
                     <form action="{{ route('passenger-visas.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="id" id="id" value="{{ $passenger_visa->id ?? '' }}">

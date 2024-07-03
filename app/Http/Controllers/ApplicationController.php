@@ -86,6 +86,16 @@ class ApplicationController extends Controller
 
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Agent $agent)
+    {
+        $title = $this->title;
+
+        return view('admin.application.edit', compact('title'));
+    }
+
     public function visaWithPassengerForm()
     {
         $title = 'Visa with Passenger';

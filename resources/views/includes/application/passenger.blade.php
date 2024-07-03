@@ -2,6 +2,38 @@
 
 <div class="row mb-3">
     <div class="col-md-4">
+        <label for="agent" class="form-label">Agent <span class="text-danger">*</span></label>
+        <select class="form-control @error('agent') is-invalid @enderror" name="agent" id="agent" required>
+            <option value="">Select One</option>
+            @foreach ($passenger_agents as $passenger_agent)
+                <option value="{{ $passenger_agent->id }}" @selected(old('agent') == $passenger_agent->id)>
+                    {{ $passenger_agent->name }}
+                </option>
+            @endforeach
+        </select>
+        @error('agent')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+    </div>
+    <div class="col-md-4">
+        <label for="passenger_name" class="form-label">Passenger Name <span class="text-danger">*</span></label>
+        <input type="text" class="form-control @error('passenger_name') is-invalid @enderror" name="passenger_name"
+            id="passenger_name" value="{{ old('passenger_name') }}" required>
+        @error('passenger_name')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+    </div>
+    <div class="col-md-4">
+        <label for="nid_no" class="form-label">NID No</label>
+        <input type="number" class="form-control @error('nid_no') is-invalid @enderror" name="nid_no" id="nid_no"
+            value="{{ old('nid_no') }}">
+        @error('nid_no')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="col-md-4">
         <label for="gender" class="form-label">Gender <span class="text-danger">*</span></label>
         <select class="form-control @error('gender') is-invalid @enderror" name="gender" id="gender" required>
             <option value="">Select One</option>
@@ -192,7 +224,9 @@
             class="form-control @error('recruiting_agent') is-invalid @enderror">
             <option value="">Select one</option>
             @foreach ($service_agents as $service_agent)
-                <option value="{{ $service_agent->id }}">{{ $service_agent->name }}</option>
+                <option value="{{ $service_agent->id }}" @selected(old('recruiting_agent') == $service_agent->id)>
+                    {{ $service_agent->name }}
+                </option>
             @endforeach
         </select>
         @error('recruiting_agent')

@@ -50,7 +50,7 @@
             id="passport_issue_place" required>
             <option value="">Select One</option>
             @foreach ($districts as $district)
-                <option value="{{ $district->id }}">{{ $district->name }}</option>
+                <option value="{{ $district->id }}" @selected(old('passport_issue_place') == $district->id)>{{ $district->name }}</option>
             @endforeach
         </select>
         @error('passport_issue_place')
